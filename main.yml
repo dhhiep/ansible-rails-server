@@ -6,3 +6,7 @@
     - vars/secrets.yml
   roles:
     - common
+    - zsh
+  # tasks:
+  #   - name: Test something
+  #     command: sudo chsh --shell=/bin/bash $USER

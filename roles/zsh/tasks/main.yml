@@ -1,0 +1,21 @@
+---
+- name: Install zsh
+  package:
+    name: zsh
+    state: present
+    update_cache: yes
+  become: True
+
+- name: get stats on oh-my-zsh
+  stat: path=~/.oh-my-zsh
+  register: oh_my_zsh_stat
+
+- name: get stats on fzf
+  stat: path=~/.fzf
+  register: fzf_stat
+
+- include: oh-my-zsh.yml
+  when: not oh_my_zsh_stat.stat.exists
+
+- include: fzf.yml
+  when: not fzf_stat.stat.exists

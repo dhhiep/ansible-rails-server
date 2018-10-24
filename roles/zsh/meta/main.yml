@@ -1,6 +1,6 @@
 galaxy_info:
   author: Hiep Dinh
-  description: Install base packages
+  description: Install zsh, oh-my-zsh, zsh-auto-suggestion, fzf
   license: license (GPLv2, CC-BY, etc)
   min_ansible_version: 1.2
   galaxy_tags: []
