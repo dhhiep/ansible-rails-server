@@ -16,7 +16,7 @@ ansible 2.6.2
 **OS Target**
 
 ```
-Ubuntu 14.04 LTS
+Ubuntu 16.04 LTS
 ```
 
 #### Development Environment
