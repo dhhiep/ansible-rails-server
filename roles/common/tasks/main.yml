@@ -1,0 +1,14 @@
+---
+- name: Install common packages
+  package:
+    name: '{{item}}'
+    state: present
+    update_cache: yes
+  become: True
+  with_items:
+    - git
+    - git-core
+    - libjpeg-dev
+    - libpq-dev
+    - htop
+    - curl
