@@ -51,3 +51,4 @@ node_modules/
 .vagrant
 
 *.retry
+test_script.yml

@@ -1,0 +1,24 @@
+---
+- name: Cloning NVM
+  git:
+    repo: https://github.com/creationix/nvm.git
+    dest: ~/.nvm
+    update: no
+
+- name: set NVM_DIR in .zshrc
+  lineinfile:
+    dest: "/home/{{ main_user}}/.zshrc"
+    regexp: 'export NVM_DIR'
+    line: 'export NVM_DIR="$HOME/.nvm"'
+
+- name: source nvm in .zshrc
+  lineinfile:
+    dest: "/home/{{ main_user }}/.zshrc"
+    regexp: 'nvm\.sh'
+    line: '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"'
+
+- name: NVM | nvm | add nvm to ~/.bashrc
+  lineinfile:
+    dest: "~/.bashrc"
+    regexp: "nvm\.sh"
+    line: "source ~/.nvm/nvm.sh"

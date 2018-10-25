@@ -16,3 +16,5 @@
     - python-pip
     - python-psycopg2
     - python-setuptools
+    - build-essential
+    - libssl-dev
