@@ -19,3 +19,9 @@
 
 - include: fzf.yml
   when: not fzf_stat.stat.exists
+
+- name: Set default shell to {{ default_shell }}
+  become: True
+  user:
+    name: "{{ main_user }}"
+    shell: "/bin/{{ default_shell }}"
