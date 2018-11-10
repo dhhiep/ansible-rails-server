@@ -14,11 +14,17 @@
 - name: source nvm in .zshrc
   lineinfile:
     dest: "/home/{{ main_user }}/.zshrc"
-    regexp: 'nvm\.sh'
+    regexp: 'nvm.sh'
     line: '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"'
 
 - name: NVM | nvm | add nvm to ~/.bashrc
   lineinfile:
     dest: "~/.bashrc"
-    regexp: "nvm\.sh"
+    regexp: "nvm.sh"
     line: "source ~/.nvm/nvm.sh"
+
+- name: source nvm in .bashrc
+  lineinfile:
+    dest: "~/.bashrc"
+    regexp: "nvm.sh"
+    line: '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"'

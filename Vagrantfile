@@ -11,6 +11,6 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.define 'server' do |app|
-    app.vm.network :private_network, ip: '192.168.33.111'
+    app.vm.network :private_network, ip: '192.168.33.112'
   end
 end

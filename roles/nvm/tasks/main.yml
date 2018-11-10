@@ -1,15 +1,10 @@
 ---
-
-- name: get stats on nvm
-  stat: path=~/.nvm
-  register: nvm_stat
+- include: get_nvm_status.yml
 
 - include: nvm.yml
-  when: not nvm.stat.exists
-
-- name: get stats on npm
-  stat: path=~/.npm
-  register: npm_stat
+  when: nvm_version.rc != 0
 
 - include: npm.yml
-  when: not nvm.stat.exists
+  when: npm_version.rc != 0
+
+- include: get_nvm_status.yml
