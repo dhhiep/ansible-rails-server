@@ -7,8 +7,10 @@
 
 - set_fact: nvm_valid={{ nvm_version.rc == 0 }}
 
-- debug: "msg='Current NVM version is: {{nvm_version.stdout}}'"
+- name: NVM CHECKING
+  debug: "msg='Current NVM version is: {{nvm_version.stdout}}'"
   when: nvm_valid
 
-- debug: "msg='NVM not installed. The task NVM installer is starting ...'"
+- name: NVM CHECKING
+  debug: "msg='NVM not installed. The task NVM installer is starting ...'"
   when: not nvm_valid

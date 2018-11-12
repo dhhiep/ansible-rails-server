@@ -7,8 +7,10 @@
 
 - set_fact: rvm_valid={{ rvm_version.rc == 0 }}
 
-- debug: "msg='Current RVM version is: {{rvm_version.stdout}}'"
+- name: RVM CHECKING
+  debug: "msg='Current RVM version is: {{rvm_version.stdout}}'"
   when: rvm_valid
 
-- debug: "msg='RVM not installed. The task RVM installer is starting ...'"
+- name: RVM CHECKING
+  debug: "msg='RVM not installed. The task RVM installer is starting ...'"
   when: not rvm_valid

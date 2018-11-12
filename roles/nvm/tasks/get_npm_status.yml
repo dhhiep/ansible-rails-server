@@ -7,8 +7,10 @@
 
 - set_fact: npm_valid={{ npm_version.rc == 0 }}
 
-- debug: "msg='Current NPM version is: {{npm_version.stdout}}'"
+- name: NPM CHECKING
+  debug: "msg='Current NPM version is: {{npm_version.stdout}}'"
   when: npm_valid
 
-- debug: "msg='NPM not installed. The task NPM installer is starting ...'"
+- name: NPM CHECKING
+  debug: "msg='NPM not installed. The task NPM installer is starting ...'"
   when: not npm_valid
