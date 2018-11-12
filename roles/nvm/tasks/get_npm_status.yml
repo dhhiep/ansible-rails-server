@@ -1,0 +1,14 @@
+---
+- name: Get NPM version
+  shell: . ~/.nvm/nvm.sh && npm --version
+  register: npm_version
+  changed_when: False
+  failed_when: False
+
+- set_fact: npm_valid={{ npm_version.rc == 0 }}
+
+- debug: "msg='Current NPM version is: {{npm_version.stdout}}'"
+  when: npm_valid
+
+- debug: "msg='NPM not installed. The task NPM installer is starting ...'"
+  when: not npm_valid

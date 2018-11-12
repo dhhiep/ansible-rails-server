@@ -1,3 +1,4 @@
 ---
 main_user: vagrant
 default_shell: zsh
+ruby_version: '2.4.4'

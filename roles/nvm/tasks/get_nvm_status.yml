@@ -5,20 +5,10 @@
   changed_when: False
   failed_when: False
 
-- name: Get NPM version
-  shell: . ~/.nvm/nvm.sh && npm --version
-  register: npm_version
-  changed_when: False
-  failed_when: False
+- set_fact: nvm_valid={{ nvm_version.rc == 0 }}
 
 - debug: "msg='Current NVM version is: {{nvm_version.stdout}}'"
-  when: nvm_version.rc == 0
+  when: nvm_valid
 
 - debug: "msg='NVM not installed. The task NVM installer is starting ...'"
-  when: nvm_version.rc != 0
-
-- debug: "msg='Current NPM version is: {{npm_version.stdout}}'"
-  when: npm_version.rc == 0
-
-- debug: "msg='NPM not installed. The task NPM installer is starting ...'"
-  when: npm_version.rc != 0
+  when: not nvm_valid

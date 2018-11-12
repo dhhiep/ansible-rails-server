@@ -1,10 +1,12 @@
 ---
 - include: get_nvm_status.yml
+- block:
+  - include: nvm.yml
+  - include: get_nvm_status.yml
+  when: not nvm_valid
 
-- include: nvm.yml
-  when: nvm_version.rc != 0
-
-- include: npm.yml
-  when: npm_version.rc != 0
-
-- include: get_nvm_status.yml
+- include: get_npm_status.yml
+- block:
+  - include: npm.yml
+  - include: get_npm_status.yml
+  when: not npm_valid

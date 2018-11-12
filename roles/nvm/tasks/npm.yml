@@ -1,4 +1,3 @@
 ---
 - name: Install NPM 
   shell: . ~/.nvm/nvm.sh && nvm install node
-  register: result
