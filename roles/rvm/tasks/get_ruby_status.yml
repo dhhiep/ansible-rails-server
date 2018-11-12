@@ -1,0 +1,14 @@
+---
+- name: Get Ruby version
+  command: "~/.rvm/bin/rvm current"
+  register: current_ruby_version
+  changed_when: False
+  failed_when: False
+
+- set_fact: ruby_valid={{ current_ruby_version.rc == 0 and ruby_version in current_ruby_version.stdout }}
+
+- debug: "msg='Current Ruby version is: {{current_ruby_version.stdout}}'"
+  when: ruby_valid
+
+- debug: "msg='Ruby {{ruby_version}} not installed. The task Ruby installer is starting ...'"
+  when: not ruby_valid

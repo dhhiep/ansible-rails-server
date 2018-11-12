@@ -1,0 +1,12 @@
+---
+- include: get_rvm_status.yml
+- block:
+  - include: rvm.yml
+  - include: get_rvm_status.yml
+  when: not rvm_valid
+
+- include: get_ruby_status.yml
+- block:
+  - include: ruby.yml
+  - include: get_ruby_status.yml
+  when: not ruby_valid

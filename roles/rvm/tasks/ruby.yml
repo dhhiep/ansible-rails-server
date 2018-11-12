@@ -1,0 +1,6 @@
+---
+- name: Install Ruby {{ruby_version}}
+  command: "~/.rvm/bin/rvm install {{ruby_version}}"
+
+- name: Set Ruby {{ruby_version}} to defaut
+  shell: "~/.rvm/bin/rvm alias create default {{ruby_version}}"
