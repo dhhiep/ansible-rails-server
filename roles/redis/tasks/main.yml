@@ -1,0 +1,74 @@
+# https://redis.io/topics/quickstart
+---
+- name: Download Redis
+  get_url:
+    remote_src: Yes
+    url: http://download.redis.io/redis-stable.tar.gz
+    dest: ~/redis-stable.tar.gz
+
+- name: Extract redis-stable.tar.gz
+  unarchive:
+    remote_src: Yes
+    src: ~/redis-stable.tar.gz
+    dest: ~/
+
+- name: Run make redis-stable
+  make:
+    chdir: ~/redis-stable
+
+- name: Install command redis-server
+  become: Yes
+  copy:
+    remote_src: Yes
+    src: /home/{{main_user}}/redis-stable/src/redis-server
+    dest: /usr/local/bin/redis-server
+    mode: a+x
+
+- name: Install command redis-cli
+  become: Yes
+  copy:
+    remote_src: Yes
+    src: /home/{{main_user}}/redis-stable/src/redis-cli
+    dest: /usr/local/bin/redis-cli
+    mode: a+x
+
+- name: Creates /etc/redis
+  become: Yes
+  file:
+    path: /etc/redis
+    state: directory
+
+- name: Creates /var/redis
+  become: Yes
+  file:
+    path: /var/redis
+    state: directory
+
+- name: Creates /var/redis/6379
+  become: Yes
+  file:
+    path: /var/redis/6379
+    state: directory
+
+- name: Install init script
+  become: Yes
+  copy:
+    remote_src: Yes
+    src: /home/{{main_user}}/redis-stable/utils/redis_init_script
+    dest: /etc/init.d/redis_6379
+    mode: a+x
+    
+- name: Create /etc/redis/6379.conf
+  become: Yes
+  template:
+    # remote_src: Yes
+    src: redis_6379.conf.js2
+    dest: /etc/redis/6379.conf
+
+- name: Add the new Redis init script to all the default runlevels 
+  shell: update-rc.d redis_6379 defaults
+  become: Yes
+
+- name: Start Redist server
+  become: Yes
+  shell: /etc/init.d/redis_6379 start

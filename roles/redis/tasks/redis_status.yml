@@ -1,0 +1,28 @@
+---
+- name: Checking port Redis
+  wait_for:
+    port: 6379
+    delay: 0
+    timeout: 1
+  register: redis_port_check
+  ignore_errors: yes
+- debug: var=redis_port_check
+
+- set_fact: redis_started_valid={{ redis_port_check.failed == false }}
+
+
+- name: Get Redis version
+  shell: redis-server --version
+  register: redis_version
+  changed_when: False
+  failed_when: False
+
+- set_fact: redis_valid={{ redis_version.rc == 0 }}
+
+- name: Redis CHECKING
+  debug: "msg='Current Redis version is: {{redis_version.stdout}}'"
+  when: redis_started_valid
+
+- name: Redis CHECKING
+  debug: "msg='Redis not installed. The task Redis installer is starting ...'"
+  when: not redis_valid
