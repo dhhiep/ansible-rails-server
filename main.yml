@@ -12,3 +12,4 @@
     - nvm
     - rvm
     - redis
+    # - postgresql
