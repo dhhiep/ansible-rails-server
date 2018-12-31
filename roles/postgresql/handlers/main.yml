@@ -1,2 +1,5 @@
 ---
-# handlers file for roles/postgresql
+- name: restart-postgresql
+  service: name=postgresql state=restarted
+  become: True
+  listen: postgresql-restart-listener

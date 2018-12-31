@@ -1,0 +1,10 @@
+---
+- name: "Create the database \"{{ database_name }}\""
+  postgresql_db:
+    name: "{{ database_name }}"
+    encoding: UTF8
+    lc_ctype: "{{ locale }}"
+    lc_collate: "{{ locale }}"
+    template: template0
+  become: True
+  become_user: postgres

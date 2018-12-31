@@ -1,0 +1,28 @@
+---
+- name: copy configuration file
+  template:
+    src: postgresql.conf.j2
+    dest: /etc/postgresql/{{pg_version}}/main/postgresql.conf
+    owner: postgres
+    group: postgres
+    mode: 0644
+  become: True
+  notify: postgresql-restart-listener
+
+- name: copy client authentication configuration file
+  template:
+    src: pg_hba.conf.j2
+    dest: /etc/postgresql/{{pg_version}}/main/pg_hba.conf
+    owner: postgres
+    group: postgres
+    mode: 0640
+  become: True
+  notify: postgresql-restart-listener
+
+- name: create project locale
+  locale_gen: name={{ locale }}
+  become: True
+
+- name: restart postgresql
+  service: name=postgresql state=restarted
+  become: True

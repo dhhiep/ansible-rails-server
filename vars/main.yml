@@ -2,9 +2,10 @@
 main_user: vagrant
 default_shell: zsh
 ruby_version: '2.4.4'
-database_name: test_db
-database_user: pg_user1
-db_pass: postgres123
+database_name: web_db
+database_user: web_user
+db_pass: web123
 database_host: localhost
 database_port: 5432
 locale: en_US.UTF-8
+pg_version: '9.5'

@@ -1,0 +1,11 @@
+---
+- name: Create a DB user and assign user {{database_user}} to DB {{database_name}}
+  postgresql_user:
+    db: "{{ database_name }}"
+    name: "{{ database_user }}"
+    password: "{{ db_pass }}"
+    encrypted: yes
+    state: present
+  become: True
+  become_user: postgres
+  register: create_db_user
